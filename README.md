@@ -107,3 +107,17 @@ designops-agent/
 
 - The implementation uses deterministic local logic for repeatable behavior and testability.
 - LLM provider configuration is scaffolded in `.env.example` and `src/config.py` for future expansion.
+
+## Milestone Changelog
+
+### v0.1-scaffold
+- Established repository structure, dependency metadata, safe local defaults, and two brief fixtures.
+- Added onboarding documentation and setup instructions for repeatable local runs.
+
+### v0.2-agent-core
+- Implemented the full LangGraph workflow and typed state model.
+- Added structured tools, retry/fallback behavior, and SQLite run/step persistence.
+
+### v0.3-tests
+- Added targeted test coverage for planner logic, tool outputs, and retry semantics.
+- Locked down baseline behavior before external integrations and future expansion.
