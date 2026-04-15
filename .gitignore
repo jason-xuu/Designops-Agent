@@ -1,0 +1,33 @@
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+
+# Python cache/build artifacts
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+
+# Local runtime/state outputs
+designops_runs.db
+outputs/
+traces/
+
+# Notebook and editor noise
+.ipynb_checkpoints/
+.DS_Store
+.idea/
+.vscode/

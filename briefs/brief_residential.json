@@ -1,0 +1,20 @@
+{
+  "id": "residential",
+  "project_name": "Mid-Rise Residential Block",
+  "site": {
+    "lot_area_sqm": 2400,
+    "frontage_m": 40,
+    "depth_m": 60,
+    "setback_m": 5
+  },
+  "program": {
+    "use": "residential",
+    "target_far": 3.2,
+    "max_height_m": 36,
+    "floor_to_floor_m": 3.2
+  },
+  "constraints": {
+    "max_site_coverage": 0.65,
+    "min_open_space_ratio": 0.2
+  }
+}

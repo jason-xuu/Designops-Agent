@@ -1,0 +1,21 @@
+{
+  "id": "mixed_use",
+  "project_name": "Transit-Oriented Mixed-Use Podium",
+  "site": {
+    "lot_area_sqm": 1200,
+    "frontage_m": 30,
+    "depth_m": 40,
+    "setback_m": 4
+  },
+  "program": {
+    "use": "mixed_use",
+    "target_far": 15.0,
+    "max_height_m": 20,
+    "floor_to_floor_m": 3.5
+  },
+  "constraints": {
+    "max_site_coverage": 0.7,
+    "min_open_space_ratio": 0.15
+  },
+  "notes": "Intentional forced-failure brief: FAR target is infeasible given lot size and height cap."
+}
