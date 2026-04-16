@@ -2,15 +2,15 @@ from __future__ import annotations
 
 import time
 from collections.abc import Callable
-from typing import Any
 
 from langgraph.graph import END, START, StateGraph
 
+from src.llm.client import LlmClient
 from src.nodes.constraint_check import constraint_check_node
 from src.nodes.doc_writer import doc_writer_node
-from src.nodes.geometry_gen import geometry_gen_node
-from src.nodes.planner import planner_node
-from src.nodes.risk_assessor import risk_assessor_node
+from src.nodes.geometry_gen import make_geometry_gen_node
+from src.nodes.planner import make_planner_node
+from src.nodes.risk_assessor import make_risk_assessor_node
 from src.state import AgentState
 from src.store.sqlite_store import SqliteStore
 
@@ -64,13 +64,20 @@ def _route_after_constraints(state: AgentState) -> str:
     return "doc_writer"
 
 
-def build_agent_graph(store: SqliteStore | None = None):
+def build_agent_graph(
+    store: SqliteStore | None = None,
+    llm: LlmClient | None = None,
+):
+    planner_fn = make_planner_node(llm)
+    geometry_fn = make_geometry_gen_node(llm)
+    risk_fn = make_risk_assessor_node(llm)
+
     graph = StateGraph(AgentState)
-    graph.add_node("planner", _wrap("planner", planner_node, store))
-    graph.add_node("geometry_gen", _wrap("geometry_gen", geometry_gen_node, store))
+    graph.add_node("planner", _wrap("planner", planner_fn, store))
+    graph.add_node("geometry_gen", _wrap("geometry_gen", geometry_fn, store))
     graph.add_node("constraint_check", _wrap("constraint_check", constraint_check_node, store))
     graph.add_node("doc_writer", _wrap("doc_writer", doc_writer_node, store))
-    graph.add_node("risk_assessor", _wrap("risk_assessor", risk_assessor_node, store))
+    graph.add_node("risk_assessor", _wrap("risk_assessor", risk_fn, store))
 
     graph.add_edge(START, "planner")
     graph.add_edge("planner", "geometry_gen")
@@ -85,8 +92,12 @@ def build_agent_graph(store: SqliteStore | None = None):
     return graph.compile()
 
 
-def run_agent(initial_state: AgentState, store: SqliteStore | None = None) -> AgentState:
-    app = build_agent_graph(store)
+def run_agent(
+    initial_state: AgentState,
+    store: SqliteStore | None = None,
+    llm: LlmClient | None = None,
+) -> AgentState:
+    app = build_agent_graph(store, llm=llm)
     final_state = app.invoke(initial_state)
     if isinstance(final_state, dict):
         return AgentState.model_validate(final_state)
