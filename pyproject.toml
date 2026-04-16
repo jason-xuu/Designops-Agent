@@ -1,17 +1,17 @@
 [project]
 name = "designops-agent"
-version = "1.0.0"
-description = "LangGraph-based DesignOps agent for brief planning, geometry generation, and constraint-aware documentation."
+version = "1.1.0"
+description = "LangGraph-based DesignOps agent for brief planning, geometry generation, and constraint-aware documentation, backed by a local Ollama LLM."
 requires-python = ">=3.10"
 dependencies = [
     "langgraph>=0.2.0",
     "langchain-core>=0.3.0",
-    "langchain-openai>=0.2.0",
-    "langchain-anthropic>=0.3.0",
     "pydantic>=2.7.0",
     "rich>=13.7.0",
     "sqlite-utils>=3.36",
     "python-dotenv>=1.0.0",
+    "openai>=1.30.0",
+    "httpx>=0.27.0",
 ]
 
 [project.optional-dependencies]
