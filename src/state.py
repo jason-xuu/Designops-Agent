@@ -27,3 +27,4 @@ class AgentState(BaseModel):
     fallback_triggered: bool = False
 
     step_traces: list[dict[str, Any]] = Field(default_factory=list)
+    llm_provenance: list[dict[str, Any]] = Field(default_factory=list)
