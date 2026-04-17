@@ -77,6 +77,8 @@ Keys (if you add any later) only belong in your local `.env`. `.env` and generat
 
 ## Run
 
+**Interview (macOS):** double-click `../interview-demos/DesignOps Agent - Residential Run.command` (or `…Mixed Use…`) from Finder, or use `interview-demos/Interview Menu.command` to pick a demo. See `interview-demos/README.md`.
+
 ```bash
 python run_agent.py --brief residential           # LLM path (Ollama)
 python run_agent.py --brief mixed_use             # forced-failure path
